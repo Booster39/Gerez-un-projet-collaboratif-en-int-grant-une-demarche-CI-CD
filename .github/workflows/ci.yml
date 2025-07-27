@@ -2,9 +2,9 @@ name: CI Tests and Coverage
 
 on:
   push:
-    branches: [main]
+    branches: ["main"]
   pull_request:
-    branches: [main]
+    branches: ["main"]
 
 jobs:
   backend-tests:
@@ -70,3 +70,5 @@ jobs:
         with:
           name: angular-coverage
           path: front/coverage/
+
+
