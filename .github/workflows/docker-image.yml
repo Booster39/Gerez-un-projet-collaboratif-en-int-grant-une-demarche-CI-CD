@@ -1,4 +1,4 @@
-name: Build Backend Docker Image
+name: Build Frontend & Backend Docker Image
 
 on:
   push:
@@ -15,3 +15,12 @@ jobs:
 
       - name: Build backend Docker image
         run: docker build ./back --file ./back/Dockerfile --tag bobapp-back:latest
+
+  build-frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build frontend Docker image
+        run: docker build ./front --file ./front/Dockerfile --tag bobapp-front:latest
