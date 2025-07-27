@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  back:
+    build:
+      context: ./back
+    container_name: bobapp-back
+    ports:
+      - "9191:9191"
+
+  front:
+    build:
+      context: ./front
+    container_name: bobapp-front
+    ports:
+      - "8080:80"
