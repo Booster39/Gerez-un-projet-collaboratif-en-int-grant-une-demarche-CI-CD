@@ -9,7 +9,7 @@ on:
 jobs:
   dockerhub:
     runs-on: ubuntu-latest
-    needs: test-and-coverage
+    needs: frontsonarcloud
 
     steps:
       - name: Checkout repository
@@ -29,4 +29,4 @@ jobs:
         with:
           context: ./front
           push: true
-          tags: to complte/bobapp-frontend:latest
+          tags: abdiame/bobapp-frontend:latest
