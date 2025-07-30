@@ -28,4 +28,4 @@ jobs:
         with:
           context: ./front
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/${{ DOCKER_FRONT_PROJECT_NAME }}:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_FRONT_PROJECT_NAME }}:latest
