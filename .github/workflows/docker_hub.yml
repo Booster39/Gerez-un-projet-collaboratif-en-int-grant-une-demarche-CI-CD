@@ -9,7 +9,7 @@ on:
 jobs:
   dockerhub:
     runs-on: ubuntu-latest
-    needs: frontsonarcloud
+   #  needs: frontsonarcloud
 
     steps:
       - name: Checkout repository
