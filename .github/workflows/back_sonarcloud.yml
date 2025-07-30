@@ -1,0 +1,23 @@
+name: Backend SonarCloud analysis
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  pull-requests: read
+
+jobs:
+  backsonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Analyze Backend with SonarCloud
+
+        uses: SonarSource/sonarcloud-github-action@4006f663ecaf1f8093e8e4abb9227f6041f52216
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
