@@ -2,10 +2,14 @@ name: Backend SonarCloud analysis
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - 'back/**'
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    types: [ opened, synchronize, reopened ]
+    paths:
+      - 'back/**'
 
 permissions:
   pull-requests: read

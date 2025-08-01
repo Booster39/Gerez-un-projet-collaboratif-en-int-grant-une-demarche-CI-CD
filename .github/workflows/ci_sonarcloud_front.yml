@@ -2,10 +2,14 @@ name: Frontend SonarCloud analysis
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+    paths:
+      - 'front/**'
   pull_request:
-    branches: [ "main" ]
-  workflow_dispatch:
+    types: [ opened, synchronize, reopened ]
+    paths:
+      - 'front/**'
 
 permissions:
   pull-requests: read
