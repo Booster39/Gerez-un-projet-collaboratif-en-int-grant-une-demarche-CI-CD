@@ -40,7 +40,7 @@ jobs:
 
       - name: Lancement des tests
         working-directory: front
-        run:  npm run test:prod -- --browsers=ChromeHeadless
+        run:  npm run test --browsers=ChromeHeadless
 
       - name: Analyse SonarQube pour le frontend
         working-directory: front
