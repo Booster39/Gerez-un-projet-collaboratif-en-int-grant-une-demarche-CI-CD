@@ -16,18 +16,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Étape 1 : Checkout du code source
       - name: Vérifier le code
         uses: actions/checkout@v4
 
-      # Étape 2 : Configuration de Node.js
       - name: Configuration de Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.15.1'
 
 
-      # Étape 4 : Cache des modules Node.js
       - name: Mettre en cache les modules Node.js
         uses: actions/cache@v4
         with:
@@ -36,18 +33,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # Étape 5 : Installation des dépendances
       - name: Installation des dépendances
         working-directory: front
         run: npm ci
 
 
-      # Étape 8 : Lancement des tests
       - name: Lancement des tests
         working-directory: front
         run:  npm run test:prod -- --browsers=ChromeHeadless
 
-      # Étape 9 : Analyse SonarQube pour le frontend
       - name: Analyse SonarQube pour le frontend
         working-directory: front
         env:
@@ -64,7 +58,6 @@ jobs:
           -Dsonar.exclusions="**/*.spec.ts, **/*.test.ts, **/tests/**"
 
 
-      # Étape 11 : Upload des résultats de test frontend
       - name: Upload des résultats de tests frontend
         if: always()
         uses: actions/upload-artifact@v4
