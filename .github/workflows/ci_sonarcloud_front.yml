@@ -11,6 +11,10 @@ on:
     paths:
       - 'front/**'
 
+permissions:
+  contents: read
+  pull-requests: read
+
 jobs:
   ci-frontend:
     runs-on: ubuntu-latest
