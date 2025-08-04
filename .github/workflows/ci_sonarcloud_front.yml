@@ -20,16 +20,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Vérifier le code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Configuration de Node.js
+      - name: Node.js Configuration
         uses: actions/setup-node@v4
         with:
           node-version: '20.15.1'
 
 
-      - name: Mettre en cache les modules Node.js
+      - name: Cache Node.js modules
         uses: actions/cache@v4
         with:
           path: front/node_modules
@@ -37,16 +37,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Installation des dépendances
+      - name: Installing dependencies
         working-directory: front
         run: npm ci
 
 
-      - name: Lancement des tests
+      - name: Executing tests
         working-directory: front
         run:  npm run test --browsers=ChromeHeadless
 
-      - name: Analyse SonarQube pour le frontend
+      - name: Analyse SonarQube for frontend
         working-directory: front
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
@@ -62,7 +62,7 @@ jobs:
           -Dsonar.exclusions="**/*.spec.ts, **/*.test.ts, **/tests/**"
 
 
-      - name: Upload des résultats de tests frontend
+      - name: Upload frontend test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
