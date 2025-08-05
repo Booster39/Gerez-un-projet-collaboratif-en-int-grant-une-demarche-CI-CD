@@ -50,7 +50,8 @@ jobs:
         run: |
           npx sonar-scanner \
           -Dsonar.projectKey=booster39_back_bobapp \
-          -Dsonar.sources=. \
+          -Dsonar.sources=src/main/java \
+          -Dsonar.tests=src/test/java \
           -Dsonar.projectName=booster39_back_bobapp \
           -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.organization=booster39 \
