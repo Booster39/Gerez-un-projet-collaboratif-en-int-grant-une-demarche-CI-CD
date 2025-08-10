@@ -2,15 +2,21 @@ version: "3.8"
 
 services:
   back:
-    build:
-      context: ./back
+   # build:
+     # context: ./back
+    image: abdiame/bobapp-backend:latest
     container_name: bobapp-back
     ports:
       - "9191:9191"
 
   front:
-    build:
-      context: ./front
+   # build:
+     # context: ./front
+    image: abdiame/bobapp-frontend:latest
     container_name: bobapp-front
     ports:
       - "8080:80"
+    environment:
+      - REACT_APP_API_URL=http://back:9191
+    depends_on:
+      - back
