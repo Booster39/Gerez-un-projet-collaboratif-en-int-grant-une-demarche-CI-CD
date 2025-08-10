@@ -1,11 +1,12 @@
+# Frontend SonarCloud analysis workflow
 name: Frontend SonarCloud analysis
 
 on:
   push:
     branches:
-      - main
+      - main                                            # On push to main
     paths:
-      - 'front/**'
+      - 'front/**'                                      # Only if frontend files changed
   pull_request:
     types: [ opened, synchronize, reopened ]
     paths:
@@ -21,16 +22,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4                       # Clone repository
 
       - name: Node.js Configuration
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v4                     # Install Node.js
         with:
           node-version: '20.15.1'
 
 
       - name: Cache Node.js modules
-        uses: actions/cache@v4
+        uses: actions/cache@v4                          # Speed up npm install
         with:
           path: front/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('front/package-lock.json') }}
@@ -39,15 +40,15 @@ jobs:
 
       - name: Installing dependencies
         working-directory: front
-        run: npm ci
+        run: npm ci                                     # Install exact deps
 
 
       - name: Executing tests
         working-directory: front
-        run:  npm run test --browsers=ChromeHeadless
+        run:  npm run test --browsers=ChromeHeadless    # Run tests
 
       - name: Analyse SonarQube for frontend
-        working-directory: front
+        working-directory: front                        # Run SonarCloud analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_FRONT }}
         run: |
