@@ -41,14 +41,13 @@ jobs:
         run: mvn clean verify
         working-directory: back
 
-
       - name: Analyse SonarQube for backend
         working-directory: back
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN_BACK }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
-            mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=booster39_back_bobapp \
           -Dsonar.projectName=booster39_back_bobapp \
           -Dsonar.organization=booster39
