@@ -3,14 +3,12 @@ name: Backend SonarCloud analysis
 
 on:
   push:
-    branches:
-      - main                        # On push to main branch
-    paths:
-      - 'back/**'                   # Only if backend files changed
+    branches: ["develop","main" ]                       # On push to main branch
+    paths: [ 'back/**', '.github/workflows/**' ]                  # Only if backend files changed
   pull_request:
     types: [ opened, synchronize, reopened ] # On PR events
-    paths:
-      - 'back/**'
+    branches:
+      - main
 
 permissions:
   contents: read                    # Read repo contents
@@ -18,7 +16,10 @@ permissions:
 
 jobs:
   backsonarcloud:
-    runs-on: ubuntu-latest          # Use latest Ubuntu
+    name: Backend - Tests & Coverage
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
 
     steps:
       - name: Checkout repository
