@@ -10,10 +10,6 @@ on:
     branches:
       - main
 
-permissions:
-  contents: read
-  pull-requests: read
-
 jobs:
   ci-frontend:
     name: Frontend - Tests & Coverage
