@@ -1,11 +1,13 @@
-# Backend Docker Hub deployment workflow
-name: CD Workflow Docker Hub Backend
+# Backend & Frontend Docker Hub deployment workflow
+name: CD Workflow Docker Hub Backend & Frontend
 
 on:
-  workflow_run:
-    workflows: ["Backend SonarCloud analysis"]  # Run after backend analysis
-    types:
-      - completed
+  push:
+    branches: [ main ]
+
+concurrency:
+  group: cd-of-main
+  cancel-in-progress: true
 
 permissions:
   contents: read
@@ -27,6 +29,14 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build and push frontend Docker image
+        uses: docker/build-push-action@v6.9.0 # Build & push image
+        with:
+          context: front
+          file: front/Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_FRONT_PROJECT_NAME }}:latest
 
       - name: Build and push backend Docker image
         uses: docker/build-push-action@v6.9.0 # Build & push image
